@@ -6,7 +6,7 @@
 #    By: alexsanc <alexsanc@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:00:30 by alexsanc          #+#    #+#              #
-#    Updated: 2023/05/17 17:48:33 by alexsanc         ###   ########.fr        #
+#    Updated: 2023/05/17 17:54:54 by alexsanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ fi
 # Check if the alias pythonette is already created
 if ! grep -q "alias pythonette" "$SHELL_CONFIG_FILE"; then
     # Add the alias pythonette to the shell config file
-    echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} \;'" >> "$SHELL_CONFIG_FILE"
+    echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} +'" >> "$SHELL_CONFIG_FILE"
 else
     echo "The alias pythonette is already created."
 fi
