@@ -6,7 +6,7 @@
 #    By: alexsanc <alexsanc@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:00:30 by alexsanc          #+#    #+#              #
-#    Updated: 2023/05/17 17:34:50 by alexsanc         ###   ########.fr        #
+#    Updated: 2023/05/17 17:48:33 by alexsanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,39 +15,60 @@
 ## It will detect if you already have pycodestyle installed and if you already have the alias pythonette.
 ## Pycodestyle will be installed through pip to your home directory without sudo rights. Thus you will be able to use it on the 42 computers.
 
-## Check if pycodestyle is already installed and tries pip install and pip3 install if not installed yet.
-if ! [ -x "$(command -v pycodestyle)" ]; then
-	if ! [ -x "$(command -v pip)" ]; then
-		if ! [ -x "$(command -v pip3)" ]; then
-			echo "Error: pip and pip3 are not installed." >&2
-			exit 1
-		else
-			pip3 install --user pycodestyle
-		fi
-	else
-		pip install --user pycodestyle
-	fi
+#!/bin/bash
+
+# Define the installation directory for pycodestyle
+INSTALL_DIR="$HOME"
+
+# Check if pycodestyle is already installed
+if ! command -v pycodestyle >/dev/null 2>&1; then
+    # Check if pip or pip3 is available
+    if command -v pip >/dev/null 2>&1; then
+        PIP_COMMAND="pip"
+    elif command -v pip3 >/dev/null 2>&1; then
+        PIP_COMMAND="pip3"
+    else
+        echo "Error: pip and pip3 are not installed." >&2
+        exit 1
+    fi
+
+    # Install pycodestyle using pip or pip3
+    if ! "$PIP_COMMAND" install --user pycodestyle; then
+        echo "Error: Failed to install pycodestyle using $PIP_COMMAND." >&2
+        exit 1
+    fi
 fi
 
-## Check if the alias pythonette is already created and if not, creates it depending on the system used. Could be .bashrc or .zshrc.
-## The alias pythonette will be used to check your PEP8 compliance of your python files but it will also be able to check a whole directory.
-if ! grep -q "alias pythonette" ~/.zshrc; then
-	if ! grep -q "alias pythonette" ~/.bashrc; then
-		if [ -f ~/.bashrc ]; then
-			echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} \;'" >> ~/.bashrc
-		else
-			echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} \;'" >> ~/.zshrc
-		fi
-	else
-		echo "The alias pythonette is already created."
-	fi
+# Determine the shell configuration file
+if [ -f "$HOME/.bashrc" ]; then
+    SHELL_CONFIG_FILE="$HOME/.bashrc"
+elif [ -f "$HOME/.zshrc" ]; then
+    SHELL_CONFIG_FILE="$HOME/.zshrc"
 else
-	echo "The alias pythonette is already created."
+    echo "Error: Unable to find .bashrc or .zshrc file." >&2
+    exit 1
 fi
 
-## Source the .zshrc to apply the changes.
-source ~/.zshrc
+# Check if the alias pythonette is already created
+if ! grep -q "alias pythonette" "$SHELL_CONFIG_FILE"; then
+    # Add the alias pythonette to the shell config file
+    echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} \;'" >> "$SHELL_CONFIG_FILE"
+else
+    echo "The alias pythonette is already created."
+fi
 
-## Print a message to inform the user that the alias pythonette is now available.
+# Source the shell config file to apply the changes
+if ! source "$SHELL_CONFIG_FILE"; then
+    echo "Error: Failed to source $SHELL_CONFIG_FILE." >&2
+    exit 1
+fi
+
+# Print a message to inform the user that the alias pythonette is now available
 echo "The alias pythonette is now available. You can use it to check your PEP8 compliance of your python files."
+
+# Clean up downloaded files (if any)
+if [ -f "$INSTALL_DIR/get-pip.py" ]; then
+    rm "$INSTALL_DIR/get-pip.py"
+fi
+
 exit 0
