@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -6,7 +8,7 @@
 #    By: alexsanc <alexsanc@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:00:30 by alexsanc          #+#    #+#              #
-#    Updated: 2023/05/17 17:54:54 by alexsanc         ###   ########.fr        #
+#    Updated: 2023/05/17 18:07:23 by alexsanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +16,6 @@
 ## The alias pythonette wil be used to check your PEP8 compliance of your python files.
 ## It will detect if you already have pycodestyle installed and if you already have the alias pythonette.
 ## Pycodestyle will be installed through pip to your home directory without sudo rights. Thus you will be able to use it on the 42 computers.
-
-#!/bin/bash
 
 # Define the installation directory for pycodestyle
 INSTALL_DIR="$HOME"
@@ -52,7 +52,7 @@ fi
 # Check if the alias pythonette is already created
 if ! grep -q "alias pythonette" "$SHELL_CONFIG_FILE"; then
     # Add the alias pythonette to the shell config file
-    echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} +'" >> "$SHELL_CONFIG_FILE"
+    echo "alias pythonette='(python3 -m pycodestyle --show-pep8 --max-line-length=300 \$(find . -name \"*.py\")) || (pip3 install --user pycodestyle && python3 -m pycodestyle --show-pep8 --max-line-length=300 \$(find . -name \"*.py\"))'" >> "$SHELL_CONFIG_FILE"
 else
     echo "The alias pythonette is already created."
 fi
