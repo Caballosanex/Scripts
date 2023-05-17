@@ -65,7 +65,7 @@ fi
 
 # Print a message to inform the user that the alias pythonette is now available
 echo "The alias pythonette is now available."
-echo -e "\033[31mYou may now proceed to restart the shell and use the alias pythonette.\033[0m"
+printf "\033[33m You may now proceed to restart the shell and use the alias pythonette.\033[0m\n"
 
 # Clean up downloaded files (if any)
 if [ -f "$INSTALL_DIR/get-pip.py" ]; then
