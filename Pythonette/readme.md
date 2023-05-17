@@ -12,7 +12,7 @@
 <!--- Add a brief introduction -->
 ## Introduction
 
-Pythonette is a script that automates the installation of `pycodestyle` and the creation of the alias `pythonette`. The `pythonette` alias is used to check the PEP8 compliance of your Python files. This script ensures that `pycodestyle` is installed to your home directory without requiring sudo rights, making it usable on the 42 computers.
+Pythonette is a script that automates the installation of `pycodestyle` and the creation of the alias `pythonette` in either .bashrc or .zshrc. The `pythonette` alias is used to check the PEP8 compliance of your Python files. This script ensures that `pycodestyle` is installed to your home directory without requiring sudo rights, making it usable on the 42 computers.
 
 <!--- Add installation instructions -->
 ## Installation
@@ -23,9 +23,9 @@ To use Pythonette, follow these steps:
 
 2. Clone the repository:
 
-   ```shell
-   git clone https://github.com/your_username/your_repository.git
-   ```
+	```shell
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Caballosanex/Scripts/main/Pythonette/pythonette.sh)"
+	```
 
 3. Change to the project directory:
 

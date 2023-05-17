@@ -6,7 +6,7 @@
 #    By: alexsanc <alexsanc@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 17:00:30 by alexsanc          #+#    #+#              #
-#    Updated: 2023/05/17 17:27:45 by alexsanc         ###   ########.fr        #
+#    Updated: 2023/05/17 17:34:50 by alexsanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,20 @@ if ! [ -x "$(command -v pycodestyle)" ]; then
 	fi
 fi
 
-## Check if the alias pythonette is already created and if not, creates it.
-## The alias pythonette will be used to check your PEP8 compliance of your python files but it will also be able to check a whole directory. 
+## Check if the alias pythonette is already created and if not, creates it depending on the system used. Could be .bashrc or .zshrc.
+## The alias pythonette will be used to check your PEP8 compliance of your python files but it will also be able to check a whole directory.
 if ! grep -q "alias pythonette" ~/.zshrc; then
-	echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} +'" >> ~/.zshrc
+	if ! grep -q "alias pythonette" ~/.bashrc; then
+		if [ -f ~/.bashrc ]; then
+			echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} \;'" >> ~/.bashrc
+		else
+			echo "alias pythonette='find . -name \"*.py\" -exec pycodestyle {} \;'" >> ~/.zshrc
+		fi
+	else
+		echo "The alias pythonette is already created."
+	fi
+else
+	echo "The alias pythonette is already created."
 fi
 
 ## Source the .zshrc to apply the changes.
