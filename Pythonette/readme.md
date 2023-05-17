@@ -21,23 +21,11 @@ To use Pythonette, follow these steps:
 
 1. Open your terminal.
 
-2. Clone the repository:
+2. Copy and Paste this line of code into your terminal:
 
 	```shell
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Caballosanex/Scripts/main/Pythonette/pythonette.sh)"
 	```
-
-3. Change to the project directory:
-
-   ```shell
-   cd your_repository
-   ```
-
-4. Run the `pythontte.sh` script:
-
-   ```shell
-   ./pythontte.sh
-   ```
 
 <!--- Add explanation of the script -->
 ## How It Works
