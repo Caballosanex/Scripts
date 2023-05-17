@@ -52,7 +52,7 @@ fi
 # Check if the alias pythonette is already created
 if ! grep -q "alias pythonette" "$SHELL_CONFIG_FILE"; then
     # Add the alias pythonette to the shell config file
-    echo \n"pythonette() { (python3 -m pycodestyle --show-pep8 --max-line-length=300 \"\${@:-\$(find . -name \"*.py\")}\") || (pip3 install --user pycodestyle && python3 -m pycodestyle --show-pep8 --max-line-length=300 \"\${@:-\$(find . -name \"*.py\")}\"); }" >> "$SHELL_CONFIG_FILE"
+    echo "alias pythonette='(python3 -m pycodestyle --show-pep8 --max-line-length=300 \${@:-\$(find . -name \"*.py\")}) || (pip3 install --user pycodestyle && python3 -m pycodestyle --show-pep8 --max-line-length=300 \${@:-\$(find . -name \"*.py\")})'" >> "$SHELL_CONFIG_FILE"
 else
     echo "The alias pythonette is already created."
 fi
