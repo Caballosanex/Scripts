@@ -64,7 +64,8 @@ if ! source "$SHELL_CONFIG_FILE"; then
 fi
 
 # Print a message to inform the user that the alias pythonette is now available
-echo "The alias pythonette is now available. You can use it to check your PEP8 compliance of your python files."
+echo "The alias pythonette is now available."
+echo "\033[31mYou may now proceed to restart the shell and use the alias pythonette."
 
 # Clean up downloaded files (if any)
 if [ -f "$INSTALL_DIR/get-pip.py" ]; then
