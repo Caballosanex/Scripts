@@ -12,7 +12,7 @@
 <!--- Add a brief introduction -->
 ## Introduction
 
-Pythonette is a script that automates the installation of `pycodestyle` and the creation of the alias `pythonette` in either .bashrc or .zshrc. The `pythonette` alias is used to check the PEP8 compliance of your Python files. This script ensures that `pycodestyle` is installed to your home directory without requiring sudo rights, making it usable on the 42 computers.
+Pythonette is a bash script that automates the installation of `pycodestyle` and the creation of the alias `pythonette` in either .bashrc or .zshrc. The `pythonette` alias is used to check the PEP8 compliance of your Python files. This script ensures that `pycodestyle` is installed to your home directory without requiring sudo rights, making it usable on the 42 computers.
 
 <!--- Add installation instructions -->
 ## Installation
