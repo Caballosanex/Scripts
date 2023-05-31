@@ -1,4 +1,4 @@
-alias autogit=/sgoinfre/Perso/alexsanc/Scripts/autogit.s
+alias autogit=/sgoinfre/Perso/alexsanc/Scripts/autogit.sh
 
 alias go='cd /sgoinfre/Perso/alexsanc'
 
